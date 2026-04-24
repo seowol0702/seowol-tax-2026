@@ -578,7 +578,7 @@
 
     <div class="price-card">
       <div class="type">단순경비율 추계</div>
-      <div class="range">수입 2,400만원 이하</div>
+      <div class="range">단순경비율 적용 대상</div>
       <div class="amount">70,000<small>원~</small></div>
       <ul>
         <li>세무사 직접 검토</li>
@@ -589,7 +589,7 @@
 
     <div class="price-card popular">
       <div class="type">기준경비율 추계</div>
-      <div class="range">수입 2,400만~7,500만원</div>
+      <div class="range">기준경비율 적용 대상</div>
       <div class="amount">150,000<small>원~</small></div>
       <ul>
         <li>세무사 직접 검토</li>
@@ -601,8 +601,8 @@
 
     <div class="price-card">
       <div class="type">간편장부</div>
-      <div class="range">간편장부 의무자</div>
-      <div class="amount">250,000<small>원~</small></div>
+      <div class="range">간편장부 대상자</div>
+      <div class="amount">200,000<small>원~</small></div>
       <ul>
         <li>장부 정리 + 작성</li>
         <li>세무사 직접 검토</li>
@@ -611,10 +611,39 @@
       </ul>
     </div>
 
+    <div class="price-card">
+      <div class="type">복식부기 의무</div>
+      <div class="range">전문직·고수입 사업자 (별도 상담)</div>
+      <div class="amount">500,000<small>원~</small></div>
+      <ul>
+        <li>복식부기 장부 작성</li>
+        <li>세무사 1:1 상담 후 견적</li>
+        <li>가산세 리스크 방지</li>
+        <li>절세 컨설팅</li>
+      </ul>
+    </div>
+
     <p class="pricing-note">
-      * VAT 별도 · 환급 성과보수 별도(선택)<br>
-      신고 유형 모르셔도 OK! 세무사가 추천해드려요
+      * VAT 별도 · 성과보수 없음<br>
+      신고 유형 모르셔도 OK! <strong>신청 폼의 자동 계산기</strong>가 예상 유형을 알려드려요
     </p>
+
+    <!-- 수수료 정산 안내 -->
+    <div style="background:var(--blue-light); border-radius:14px; padding:18px 16px; margin-top:20px; font-size:13px; color:var(--blue-dark); line-height:1.7;">
+      <strong style="display:block; margin-bottom:6px; font-size:14px;">💡 수임료는 어떻게 결정되나요?</strong>
+      접수 시 알려주신 <strong>업종·2024년 수입·장부 여부</strong>를 바탕으로 예상 신고유형의 수임료를 선입금 받습니다.
+      실제 자료 확인 후 유형이 달라지면 <strong>납부서 전달 전에 정산</strong>해드려요.<br>
+      • 더 간단한 유형 → <strong>차액 환불</strong><br>
+      • 더 복잡한 유형 → <strong>차액 추가 청구</strong>
+    </div>
+
+    <!-- 환불 정책 안내 -->
+    <div style="background:#FFF3E0; border:1.5px solid #FFA726; border-radius:14px; padding:18px 16px; margin-top:12px; font-size:13px; color:#E65100; line-height:1.7;">
+      <strong style="display:block; margin-bottom:6px; font-size:14px;">🔒 환불 정책</strong>
+      ✅ <strong>입금 후 24시간 이내</strong>: 100% 환불 가능<br>
+      ❌ <strong>24시간 경과 후 단순 변심</strong>: 환불 불가<br>
+      ✅ 실제 유형이 더 간단해진 경우: 차액 환불
+    </div>
   </div>
 </section>
 
@@ -717,6 +746,18 @@
       <div class="faq-item">
         <button class="faq-q">부가세나 원천세도 같이 해주시나요?</button>
         <div class="faq-a"><p>네, 필요하신 분들은 별도 문의 주시면 안내드립니다. 이번 신고는 <strong>종합소득세</strong> 전용 상품이에요.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">수임료는 어떻게 결정되나요?</button>
+        <div class="faq-a"><p>접수 시 알려주신 <strong>업종·2024년 수입금액·장부 여부</strong>를 바탕으로 예상 신고유형의 수임료가 자동 계산됩니다. 실제 자료 검토 후 유형이 달라지면 <strong>납부서 전달 전에 차액 정산</strong>해드려요 (간단해지면 환불, 복잡해지면 추가 청구).</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">단순 변심으로 환불 받을 수 있나요?</button>
+        <div class="faq-a"><p>✅ <strong>수임료 입금 후 24시간 이내</strong>에는 100% 환불 가능합니다.<br>❌ <strong>24시간 경과 후에는 단순 변심에 의한 환불이 불가</strong>합니다. 업무가 이미 착수되었기 때문이에요.<br>다만 실제 신고유형이 더 간단해진 경우 차액은 환불해드립니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">복식부기 의무자도 신청 가능한가요?</button>
+        <div class="faq-a"><p>네, 가능합니다. 다만 <strong>복식부기 의무자는 추계로 신고하면 가산세 폭탄</strong>이 있어요 (무신고 가산세 20% + 무기장 가산세 + 기준경비율 1/2만 인정). 복식부기는 <strong>50만원부터 별도 상담 후 견적</strong>을 드리고, 전문직(세무사·변호사·의사 등)은 수입 무관 복식부기 의무예요.</p></div>
       </div>
     </div>
   </div>
