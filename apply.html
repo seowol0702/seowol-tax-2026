@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>신청하기 | 세무법인 서월</title>
+<meta name="description" content="2분이면 끝나는 간편 신청. 세무법인 서월 종합소득세 신고 대행.">
+<meta name="theme-color" content="#2A6EFF">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --blue: #2A6EFF;
+    --blue-dark: #1D5AE0;
+    --blue-light: #EAF1FF;
+    --orange: #FF7E36;
+    --orange-dark: #E86A24;
+    --orange-light: #FFF2EA;
+    --text: #1A1A1A;
+    --text-soft: #555;
+    --text-mute: #8A8A8A;
+    --bg: #FFFFFF;
+    --bg-soft: #F7F8FA;
+    --line: #ECEEF1;
+    --danger: #E53935;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    color: var(--text);
+    background: var(--bg-soft);
+    line-height: 1.5;
+    letter-spacing: -0.015em;
+    min-height: 100vh;
+  }
+  img { max-width: 100%; display: block; }
+  button { font-family: inherit; cursor: pointer; border: none; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== Header ===== */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    max-width: 560px; margin: 0 auto;
+  }
+  .header-back {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; color: var(--text-soft);
+    padding: 6px 10px; border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .header-back:hover { background: var(--bg-soft); }
+  .header-logo img { height: 20px; width: auto; }
+
+  /* ===== Progress ===== */
+  .progress-wrap {
+    background: #fff;
+    padding: 16px 20px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .progress-inner { max-width: 560px; margin: 0 auto; }
+  .progress-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .progress-label { font-size: 13px; color: var(--text-mute); font-weight: 600; }
+  .progress-count {
+    font-size: 14px; font-weight: 800;
+    color: var(--blue);
+  }
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--orange) 0%, var(--blue) 100%);
+    width: 14.3%; /* 1/7 */
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ===== Main ===== */
+  main {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 28px 20px 100px;
+  }
+
+  .step {
+    display: none;
+    animation: slideIn 0.3s ease;
+  }
+  .step.active { display: block; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .step-title {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+  .step-desc {
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  /* ===== Form ===== */
+  .form-group { margin-bottom: 22px; }
+  .form-label {
+    display: block;
+    font-size: 14px; font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .form-label .req { color: var(--orange); margin-left: 3px; }
+  .form-label .opt { color: var(--text-mute); font-weight: 500; font-size: 12px; margin-left: 6px; }
+  .form-control {
+    width: 100%;
+    padding: 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+    background: #fff;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-control:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(42,110,255,0.12);
+  }
+  textarea.form-control { min-height: 90px; resize: vertical; }
+
+  .radio-group, .check-group {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .radio-group.inline, .check-group.inline {
+    flex-direction: row; flex-wrap: wrap;
+  }
+  .radio-label, .check-label {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex: 1;
+    min-width: calc(50% - 4px);
+  }
+  .radio-label input, .check-label input {
+    accent-color: var(--blue);
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+  }
+  .radio-label:has(input:checked), .check-label:has(input:checked) {
+    background: var(--blue-light);
+    border-color: var(--blue);
+    color: var(--blue-dark);
+    font-weight: 700;
+  }
+  .radio-label:hover, .check-label:hover { border-color: var(--blue); }
+
+  .agree-label {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px;
+    color: var(--text-soft);
+    cursor: pointer;
+    padding: 8px 0;
+  }
+  .agree-label input { margin-top: 3px; accent-color: var(--blue); flex-shrink: 0; }
+  .agree-label strong { color: var(--text); }
+
+  /* ===== Info Box ===== */
+  .info-box {
+    background: var(--blue-light);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--blue-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .info-box strong { font-weight: 800; }
+
+  /* ===== Pricing preview in Step 3 ===== */
+  .pricing-hint {
+    background: var(--orange-light);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--orange-dark);
+  }
+  .pricing-hint strong { font-weight: 800; display: block; margin-bottom: 6px; }
+  .pricing-hint table { width: 100%; margin-top: 8px; }
+  .pricing-hint td { padding: 4px 0; font-size: 13px; }
+  .pricing-hint td:last-child { text-align: right; font-weight: 700; }
+
+  /* ===== Navigation ===== */
+  .step-nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 16px; font-weight: 700;
+    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+    min-height: 54px;
+    cursor: pointer;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--orange);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(255,126,54,0.3);
+    flex: 1;
+  }
+  .btn-primary:hover { background: var(--orange-dark); }
+  .btn-primary:disabled { background: #CCC; box-shadow: none; cursor: not-allowed; }
+  .btn-prev {
+    background: #fff;
+    color: var(--text-soft);
+    border: 1.5px solid var(--line);
+    padding: 16px 20px;
+    flex: 0 0 auto;
+  }
+  .btn-prev:hover { background: var(--bg-soft); }
+  .btn-submit {
+    background: var(--orange);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(255,126,54,0.3);
+    flex: 1;
+    font-size: 17px;
+  }
+
+  /* ===== Success ===== */
+  .success-wrap {
+    display: none;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 40px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    margin-top: 20px;
+  }
+  .success-wrap.show { display: block; animation: slideIn 0.4s ease; }
+  .success-emoji { font-size: 56px; margin-bottom: 14px; }
+  .success-title { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
+  .success-sub { font-size: 15px; color: var(--text-soft); margin-bottom: 24px; line-height: 1.6; }
+
+  .next-steps {
+    background: var(--blue-light);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    margin: 20px 0;
+    text-align: left;
+  }
+  .next-steps h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .next-steps ol {
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .next-steps ol li { margin-bottom: 4px; }
+  .next-steps ol li strong { color: var(--blue-dark); }
+
+  .account-box {
+    background: var(--orange-light);
+    border: 1.5px dashed var(--orange);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: var(--orange-dark);
+    text-align: left;
+  }
+  .account-box strong { font-weight: 800; display: block; margin-bottom: 4px; color: var(--text); }
+  .account-box .account { font-family: 'Courier New', monospace; font-weight: 700; font-size: 15px; color: var(--text); }
+
+  .btn-kakao {
+    background: #FEE500;
+    color: #191919;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  /* ===== Shake animation for invalid ===== */
+  .shake { animation: shake 0.4s; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .error-msg {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: 8px;
+    font-weight: 600;
+    display: none;
+  }
+  .error-msg.show { display: block; animation: slideIn 0.2s; }
+
+  /* ===== Responsive ===== */
+  @media (min-width: 561px) {
+    .step-title { font-size: 28px; }
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="header-back">
+      <span>←</span><span>돌아가기</span>
+    </a>
+    <a href="index.html" class="header-logo">
+      <img src="logo.png" alt="세무법인 서월">
+    </a>
+    <div style="width:72px"></div>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-top">
+      <span class="progress-label" id="progressLabel">기본 정보</span>
+      <span class="progress-count"><span id="currentStep">1</span> / 7</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <form id="applyForm" novalidate>
+
+    <!-- ===== STEP 1: 기본 정보 ===== -->
+    <section class="step active" data-step="1" data-label="기본 정보">
+      <h1 class="step-title">먼저 성함부터 알려주세요 👋</h1>
+      <p class="step-desc">접수 후 연락드릴 기본 정보예요</p>
+
+      <div class="form-group">
+        <label class="form-label">성명<span class="req">*</span></label>
+        <input type="text" name="성명" class="form-control" placeholder="홍길동" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">휴대폰 번호<span class="req">*</span></label>
+        <input type="tel" name="휴대폰" class="form-control" placeholder="010-0000-0000" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">카카오톡 ID<span class="opt">휴대폰 번호와 동일하면 비워두세요</span></label>
+        <input type="text" name="카카오톡ID" class="form-control" placeholder="kakao_id">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">이메일<span class="opt">선택</span></label>
+        <input type="email" name="이메일" class="form-control" placeholder="email@example.com">
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-primary" onclick="nextStep()">다음 →</button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 2: 업종 ===== -->
+    <section class="step" data-step="2" data-label="업종">
+      <h1 class="step-title">어떤 일을 하고 계세요?</h1>
+      <p class="step-desc">업종에 따라 맞춤 신고 방식을 추천해드려요</p>
+
+      <div class="form-group">
+        <label class="form-label">주 업종·직업<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="업종" value="배달·퀵·대리기사" required>🛵 배달·퀵·대리기사</label>
+          <label class="radio-label"><input type="radio" name="업종" value="유튜버·크리에이터">🎬 유튜버·크리에이터</label>
+          <label class="radio-label"><input type="radio" name="업종" value="강사·과외">👨‍🏫 강사·과외</label>
+          <label class="radio-label"><input type="radio" name="업종" value="학원강사">🏫 학원강사</label>
+          <label class="radio-label"><input type="radio" name="업종" value="디자이너·개발자 프리랜서">💻 디자이너·개발자 프리랜서</label>
+          <label class="radio-label"><input type="radio" name="업종" value="보험설계사">🏠 보험설계사</label>
+          <label class="radio-label"><input type="radio" name="업종" value="쇼핑몰·스마트스토어">🛍️ 쇼핑몰·스마트스토어</label>
+          <label class="radio-label"><input type="radio" name="업종" value="작가·아티스트">🎨 작가·아티스트</label>
+          <label class="radio-label"><input type="radio" name="업종" value="기타">✨ 기타</label>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-prev" onclick="prevStep()">← 이전</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">다음 →</button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 3: 수입 & 신고 유형 ===== -->
+    <section class="step" data-step="3" data-label="수입·신고">
+      <h1 class="step-title">수입 규모와 신고 유형을<br>알려주세요</h1>
+      <p class="step-desc">수임료가 결정되는 단계예요. 모르셔도 괜찮아요!</p>
+
+      <div class="form-group">
+        <label class="form-label">2025년 귀속 총수입 구간<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="수입구간" value="2400만 이하" required>2,400만원 이하</label>
+          <label class="radio-label"><input type="radio" name="수입구간" value="2400~7500만">2,400만원 ~ 7,500만원</label>
+          <label class="radio-label"><input type="radio" name="수입구간" value="7500만 이상">7,500만원 이상</label>
+          <label class="radio-label"><input type="radio" name="수입구간" value="모름">잘 모르겠어요</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">희망 신고 유형<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="신고유형" value="단순경비율 추계" required>단순경비율 추계 <strong style="color:var(--orange);margin-left:auto">7만원~</strong></label>
+          <label class="radio-label"><input type="radio" name="신고유형" value="기준경비율 추계">기준경비율 추계 <strong style="color:var(--orange);margin-left:auto">15만원~</strong></label>
+          <label class="radio-label"><input type="radio" name="신고유형" value="간편장부">간편장부 <strong style="color:var(--orange);margin-left:auto">25만원~</strong></label>
+          <label class="radio-label"><input type="radio" name="신고유형" value="모름 - 세무사 추천">모름 — 세무사가 추천해주세요</label>
+        </div>
+      </div>
+
+      <div class="pricing-hint">
+        <strong>💡 수임료는 이 단계 선택으로 결정돼요</strong>
+        "모르겠어요" 선택 시 세무사가 가장 유리한 방식으로 안내드립니다. 부가세 별도, 추가 비용 없음.
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-prev" onclick="prevStep()">← 이전</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">다음 →</button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 4: 사업자 관련 ===== -->
+    <section class="step" data-step="4" data-label="사업자 등록">
+      <h1 class="step-title">사업자등록 되어 있으세요?</h1>
+      <p class="step-desc">사업자등록자인지 프리랜서인지에 따라 준비 서류가 달라져요</p>
+
+      <div class="form-group">
+        <label class="form-label">사업자등록 여부<span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-label"><input type="radio" name="사업자등록여부" value="있음" id="bizYes" required>있음</label>
+          <label class="radio-label"><input type="radio" name="사업자등록여부" value="없음" id="bizNo">없음 (프리랜서)</label>
+        </div>
+      </div>
+
+      <div class="form-group hidden" id="bizNumGroup">
+        <label class="form-label">사업자등록번호</label>
+        <input type="text" name="사업자등록번호" class="form-control" placeholder="000-00-00000">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">홈택스 아이디 보유 여부<span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-label"><input type="radio" name="홈택스ID여부" value="있음" required>있음</label>
+          <label class="radio-label"><input type="radio" name="홈택스ID여부" value="없음">없음</label>
+          <label class="radio-label"><input type="radio" name="홈택스ID여부" value="모름">모름</label>
+        </div>
+      </div>
+
+      <div class="info-box">
+        💡 홈택스 아이디가 없어도 걱정 마세요!<br>
+        <strong>간편인증(카카오·네이버·토스)</strong>으로 로그인 가능합니다.
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-prev" onclick="prevStep()">← 이전</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">다음 →</button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 5: 작년 & 추가소득 ===== -->
+    <section class="step" data-step="5" data-label="과거 이력">
+      <h1 class="step-title">지난 이력과 추가 소득이 있나요?</h1>
+      <p class="step-desc">놓치는 소득 없이 정확하게 신고하기 위한 정보예요</p>
+
+      <div class="form-group">
+        <label class="form-label">직전년도(2024) 신고 여부<span class="opt">선택</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="직전년도신고" value="신고 안함">신고 안 함</label>
+          <label class="radio-label"><input type="radio" name="직전년도신고" value="홈택스 직접">홈택스에서 직접 신고</label>
+          <label class="radio-label"><input type="radio" name="직전년도신고" value="세무사 통해">세무사를 통해 신고</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">추가 소득<span class="opt">해당되는 것 모두</span></label>
+        <div class="check-group">
+          <label class="check-label"><input type="checkbox" name="추가소득" value="근로소득">근로소득 (회사 급여)</label>
+          <label class="check-label"><input type="checkbox" name="추가소득" value="이자·배당소득">이자·배당소득</label>
+          <label class="check-label"><input type="checkbox" name="추가소득" value="임대소득">임대소득</label>
+          <label class="check-label"><input type="checkbox" name="추가소득" value="기타소득">기타소득</label>
+          <label class="check-label"><input type="checkbox" name="추가소득" value="없음">없음</label>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-prev" onclick="prevStep()">← 이전</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">다음 →</button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 6: 공제 항목 ===== -->
+    <section class="step" data-step="6" data-label="공제 항목">
+      <h1 class="step-title">해당되는 공제 항목을<br>체크해주세요 💰</h1>
+      <p class="step-desc">공제받을 수 있는 항목이 많을수록 환급이 커져요!</p>
+
+      <div class="info-box">
+        ✨ <strong>환급 최대화 팁</strong><br>
+        아래 항목 중 하나라도 해당되면 <strong>꼭 체크</strong>해주세요. 해당 증빙서류는 접수 후 안내드립니다.
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">공제받을 항목<span class="opt">있는 것 모두 체크</span></label>
+        <div class="check-group">
+          <label class="check-label"><input type="checkbox" name="공제항목" value="연금저축/IRP">📊 연금저축 / IRP 가입</label>
+          <label class="check-label"><input type="checkbox" name="공제항목" value="노란우산공제">🏦 노란우산공제 가입</label>
+          <label class="check-label"><input type="checkbox" name="공제항목" value="기부금">❤️ 기부금 (종교·사회복지 등)</label>
+          <label class="check-label"><input type="checkbox" name="공제항목" value="의료비">🏥 의료비 (본인·가족)</label>
+          <label class="check-label"><input type="checkbox" name="공제항목" value="교육비">🎓 교육비 (본인·자녀)</label>
+          <label class="check-label"><input type="checkbox" name="공제항목" value="월세">🏠 월세 (무주택 세대주)</label>
+          <label class="check-label"><input type="checkbox" name="공제항목" value="자녀">👨‍👩‍👧 자녀 세액공제</label>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-prev" onclick="prevStep()">← 이전</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep()">다음 →</button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 7: 마무리 ===== -->
+    <section class="step" data-step="7" data-label="마무리">
+      <h1 class="step-title">거의 다 왔어요!<br>마지막 단계예요 🎉</h1>
+      <p class="step-desc">마무리 정보만 입력하시면 접수 완료!</p>
+
+      <div class="form-group">
+        <label class="form-label">희망 연락 시간<span class="opt">선택</span></label>
+        <div class="radio-group inline">
+          <label class="radio-label"><input type="radio" name="희망연락시간" value="오전">오전</label>
+          <label class="radio-label"><input type="radio" name="희망연락시간" value="오후">오후</label>
+          <label class="radio-label"><input type="radio" name="희망연락시간" value="저녁">저녁</label>
+          <label class="radio-label"><input type="radio" name="희망연락시간" value="아무때나">아무때나</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">유입 경로<span class="opt">선택</span></label>
+        <div class="radio-group inline">
+          <label class="radio-label"><input type="radio" name="유입경로" value="당근">🥕 당근</label>
+          <label class="radio-label"><input type="radio" name="유입경로" value="지인소개">지인소개</label>
+          <label class="radio-label"><input type="radio" name="유입경로" value="네이버 검색">네이버 검색</label>
+          <label class="radio-label"><input type="radio" name="유입경로" value="인스타그램">인스타그램</label>
+          <label class="radio-label"><input type="radio" name="유입경로" value="기타">기타</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">추가 요청사항<span class="opt">선택</span></label>
+        <textarea name="추가요청사항" class="form-control" placeholder="궁금한 점이나 추가로 알려주실 내용이 있다면 자유롭게 작성해주세요"></textarea>
+      </div>
+
+      <div class="form-group" style="border-top:1px solid var(--line); padding-top:20px;">
+        <label class="agree-label">
+          <input type="checkbox" name="개인정보동의" id="agreeRequired" required>
+          <span><strong>[필수]</strong> 종합소득세 신고 대행 업무를 위해 위 개인정보 수집·이용에 동의합니다. 수집된 정보는 업무 완료 후 즉시 파기됩니다.</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="agree-label">
+          <input type="checkbox" name="마케팅동의">
+          <span><strong>[선택]</strong> 향후 세무 관련 유익한 정보 수신에 동의합니다.</span>
+        </label>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-prev" onclick="prevStep()">← 이전</button>
+        <button type="submit" class="btn btn-submit" id="submitBtn">🚀 신청 완료하기</button>
+      </div>
+    </section>
+
+  </form>
+
+  <!-- ===== SUCCESS ===== -->
+  <div class="success-wrap" id="successWrap">
+    <div class="success-emoji">🎉</div>
+    <div class="success-title">신청 완료!</div>
+    <p class="success-sub">접수 확인 후 <strong>카톡으로 안내</strong>드릴게요.<br>보통 당일 내 연락드립니다.</p>
+
+    <div class="account-box">
+      <strong>💳 수임료 입금 계좌</strong>
+      <div class="account">KEB하나은행 218-910041-90704</div>
+      <div style="font-size:12px;margin-top:4px;">예금주: 세무법인 서월 · 입금 시 본인 성함 기재</div>
+    </div>
+
+    <div class="next-steps">
+      <h4>📌 이후 진행 순서</h4>
+      <ol>
+        <li><strong>카톡 접수 확인</strong> — 정확한 수임료 안내 (오늘 내)</li>
+        <li><strong>수임료 입금</strong> — 위 계좌로 이체</li>
+        <li><strong>홈택스 수임동의</strong> — 3분이면 끝</li>
+        <li><strong>자료 업로드</strong> — 체크리스트대로 업로드</li>
+        <li><strong>세무사 검토 & 신고</strong> — 2~5일 소요</li>
+        <li><strong>결과 안내</strong> — 접수증·납부서·절세팁 발송</li>
+      </ol>
+    </div>
+
+    <p style="font-size:13px;color:var(--text-mute);margin:16px 0 8px;">
+      ⚠️ 카톡 연락을 놓치지 않도록<br><strong>채널 추가</strong>를 꼭 해주세요!
+    </p>
+    <a href="http://pf.kakao.com/_spqNG/chat" target="_blank" class="btn-kakao">
+      💬 카카오톡 채널 추가하기
+    </a>
+    <a href="index.html" style="display:block; margin-top:16px; font-size:14px; color:var(--text-mute); padding:8px;">메인 페이지로 돌아가기</a>
+  </div>
+</main>
+
+<script>
+  // Apps Script 웹 앱 URL (배포 후 입력됨)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwsXvarCoPFVab3P_hj4YaA-xJSmRCcVrWkAdmg8hpQQk5S1fP5eg9UA5ZoIXjhu_fO/exec";
+
+  const TOTAL_STEPS = 7;
+  let currentStep = 1;
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const stepEl = document.querySelector(`.step[data-step="${n}"]`);
+    stepEl.classList.add('active');
+    currentStep = n;
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateProgress() {
+    const pct = (currentStep / TOTAL_STEPS) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('currentStep').textContent = currentStep;
+    const label = document.querySelector(`.step[data-step="${currentStep}"]`).dataset.label;
+    document.getElementById('progressLabel').textContent = label;
+  }
+
+  function nextStep() {
+    if (!validateStep(currentStep)) return;
+    if (currentStep < TOTAL_STEPS) showStep(currentStep + 1);
+  }
+
+  function prevStep() {
+    if (currentStep > 1) showStep(currentStep - 1);
+  }
+
+  function validateStep(n) {
+    const stepEl = document.querySelector(`.step[data-step="${n}"]`);
+
+    // Text/email/tel inputs with required
+    const textInputs = stepEl.querySelectorAll('input[type="text"][required], input[type="tel"][required], input[type="email"][required]');
+    for (const input of textInputs) {
+      if (!input.value.trim()) {
+        input.focus();
+        input.classList.add('shake');
+        setTimeout(() => input.classList.remove('shake'), 400);
+        const label = input.closest('.form-group').querySelector('.form-label').textContent.replace('*','').trim();
+        alert(`'${label}' 항목을 입력해주세요`);
+        return false;
+      }
+    }
+
+    // Radio groups with required
+    const requiredRadios = stepEl.querySelectorAll('input[type="radio"][required]');
+    const checkedGroups = new Set();
+    for (const radio of requiredRadios) {
+      const group = stepEl.querySelectorAll(`input[name="${radio.name}"]`);
+      const isChecked = Array.from(group).some(r => r.checked);
+      if (!isChecked && !checkedGroups.has(radio.name)) {
+        const label = radio.closest('.form-group').querySelector('.form-label').textContent.replace('*','').trim();
+        alert(`'${label}' 항목을 선택해주세요`);
+        return false;
+      }
+      if (isChecked) checkedGroups.add(radio.name);
+    }
+
+    return true;
+  }
+
+  // 휴대폰 번호 자동 포맷
+  document.querySelector('input[name="휴대폰"]').addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.slice(0, 11);
+    if (v.length >= 7) e.target.value = v.replace(/(\d{3})(\d{4})(\d{0,4})/, '$1-$2-$3').replace(/-$/, '');
+    else if (v.length >= 4) e.target.value = v.replace(/(\d{3})(\d{0,4})/, '$1-$2').replace(/-$/, '');
+    else e.target.value = v;
+  });
+
+  // 사업자등록번호 조건부 표시
+  document.getElementById('bizYes').addEventListener('change', () => {
+    document.getElementById('bizNumGroup').classList.remove('hidden');
+  });
+  document.getElementById('bizNo').addEventListener('change', () => {
+    document.getElementById('bizNumGroup').classList.add('hidden');
+    document.querySelector('input[name="사업자등록번호"]').value = '';
+  });
+
+  // 최종 제출
+  document.getElementById('applyForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!validateStep(currentStep)) return;
+
+    // 개인정보 동의 필수 체크
+    if (!document.getElementById('agreeRequired').checked) {
+      alert('개인정보 수집·이용 동의는 필수입니다.');
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '접수 중...';
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // checkbox 값 합치기
+    const extras = formData.getAll('추가소득').join(', ');
+    const deductions = formData.getAll('공제항목').join(', ');
+    formData.delete('추가소득');
+    formData.delete('공제항목');
+    formData.append('추가소득', extras);
+    formData.append('공제항목', deductions);
+
+    // 접수일시 추가
+    const now = new Date();
+    const ts = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+    formData.append('접수일시', ts);
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      });
+
+      // 성공 화면 표시
+      form.style.display = 'none';
+      document.querySelector('.progress-wrap').style.display = 'none';
+      document.getElementById('successWrap').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+      alert('일시적 오류가 발생했어요. 잠시 후 다시 시도해주세요 🙏');
+      btn.disabled = false;
+      btn.textContent = '🚀 신청 완료하기';
+    }
+  });
+
+  // 초기 진행률 설정
+  updateProgress();
+</script>
+
+</body>
+</html>
