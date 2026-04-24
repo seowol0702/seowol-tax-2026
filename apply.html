@@ -205,19 +205,79 @@
   }
   .info-box strong { font-weight: 800; }
 
-  /* ===== Pricing preview in Step 3 ===== */
-  .pricing-hint {
-    background: var(--orange-light);
-    border-radius: var(--radius-sm);
-    padding: 16px;
-    margin-top: 16px;
-    font-size: 13px;
-    color: var(--orange-dark);
+  /* ===== 실시간 예측 카드 ===== */
+  .form-hint {
+    font-size: 12px;
+    color: var(--text-mute);
+    margin: -4px 0 8px;
+    line-height: 1.5;
   }
-  .pricing-hint strong { font-weight: 800; display: block; margin-bottom: 6px; }
-  .pricing-hint table { width: 100%; margin-top: 8px; }
-  .pricing-hint td { padding: 4px 0; font-size: 13px; }
-  .pricing-hint td:last-child { text-align: right; font-weight: 700; }
+  .predict-card {
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    margin: 24px 0 20px;
+    position: relative;
+    animation: slideIn 0.35s ease;
+  }
+  .predict-card.normal {
+    background: linear-gradient(135deg, #EAF1FF 0%, #F0F8FF 100%);
+    border: 2px solid var(--blue);
+    box-shadow: 0 8px 24px rgba(42,110,255,0.15);
+  }
+  .predict-card.special {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFF8F0 100%);
+    border: 2px solid #FFA726;
+    box-shadow: 0 8px 24px rgba(255,167,38,0.18);
+  }
+  .predict-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-mute);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .predict-type {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--blue-dark);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .predict-card.special .predict-type {
+    color: #E65100;
+  }
+  .predict-fee {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+  }
+  .predict-fee .amount {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--orange);
+  }
+  .predict-fee .vat {
+    font-size: 12px;
+    color: var(--text-mute);
+  }
+  .predict-note {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .predict-notice {
+    font-size: 11px;
+    color: var(--text-mute);
+    line-height: 1.5;
+    font-style: italic;
+  }
 
   /* ===== Navigation ===== */
   .step-nav {
@@ -410,16 +470,24 @@
 
       <div class="form-group">
         <label class="form-label">주 업종·직업<span class="req">*</span></label>
+        <p class="form-hint">가장 가까운 것 하나 선택</p>
         <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="업종" value="배달·퀵·대리기사" required>🛵 배달·퀵·대리기사</label>
-          <label class="radio-label"><input type="radio" name="업종" value="유튜버·크리에이터">🎬 유튜버·크리에이터</label>
-          <label class="radio-label"><input type="radio" name="업종" value="강사·과외">👨‍🏫 강사·과외</label>
-          <label class="radio-label"><input type="radio" name="업종" value="학원강사">🏫 학원강사</label>
-          <label class="radio-label"><input type="radio" name="업종" value="디자이너·개발자 프리랜서">💻 디자이너·개발자 프리랜서</label>
-          <label class="radio-label"><input type="radio" name="업종" value="보험설계사">🏠 보험설계사</label>
-          <label class="radio-label"><input type="radio" name="업종" value="쇼핑몰·스마트스토어">🛍️ 쇼핑몰·스마트스토어</label>
-          <label class="radio-label"><input type="radio" name="업종" value="작가·아티스트">🎨 작가·아티스트</label>
-          <label class="radio-label"><input type="radio" name="업종" value="기타">✨ 기타</label>
+          <label class="radio-label"><input type="radio" name="업종" value="배달·퀵·대리기사" data-group="C" required>🛵 배달·퀵·대리기사</label>
+          <label class="radio-label"><input type="radio" name="업종" value="유튜버·크리에이터" data-group="C">🎬 유튜버·크리에이터</label>
+          <label class="radio-label"><input type="radio" name="업종" value="강사·과외" data-group="C">👨‍🏫 강사·과외</label>
+          <label class="radio-label"><input type="radio" name="업종" value="학원강사" data-group="C">🏫 학원강사</label>
+          <label class="radio-label"><input type="radio" name="업종" value="디자이너·개발자 프리랜서" data-group="C">💻 디자이너·개발자 프리랜서</label>
+          <label class="radio-label"><input type="radio" name="업종" value="보험설계사" data-group="C">🏠 보험설계사</label>
+          <label class="radio-label"><input type="radio" name="업종" value="작가·아티스트" data-group="C">🎨 작가·아티스트</label>
+          <label class="radio-label"><input type="radio" name="업종" value="미용·피부·헬스트레이너" data-group="C">💆 미용·피부·헬스트레이너</label>
+          <label class="radio-label"><input type="radio" name="업종" value="쇼핑몰·스마트스토어" data-group="A">🛍️ 쇼핑몰·스마트스토어</label>
+          <label class="radio-label"><input type="radio" name="업종" value="도소매·유통" data-group="A">🛒 도소매·유통</label>
+          <label class="radio-label"><input type="radio" name="업종" value="음식점·카페" data-group="B">🍔 음식점·카페</label>
+          <label class="radio-label"><input type="radio" name="업종" value="건설·인테리어" data-group="B">🏗️ 건설·인테리어</label>
+          <label class="radio-label"><input type="radio" name="업종" value="숙박·펜션" data-group="B">🏨 숙박·펜션</label>
+          <label class="radio-label"><input type="radio" name="업종" value="제조·공방" data-group="B">🏭 제조·공방</label>
+          <label class="radio-label"><input type="radio" name="업종" value="전문직 (세무사·변호사·의사 등)" data-group="D">⚖️ 전문직 (세무사·변호사·의사)</label>
+          <label class="radio-label"><input type="radio" name="업종" value="기타" data-group="?">✨ 기타</label>
         </div>
       </div>
 
@@ -429,34 +497,55 @@
       </div>
     </section>
 
-    <!-- ===== STEP 3: 수입 & 신고 유형 ===== -->
+    <!-- ===== STEP 3: 수입 & 신고 유형 자동 예측 ===== -->
     <section class="step" data-step="3" data-label="수입·신고">
-      <h1 class="step-title">수입 규모와 신고 유형을<br>알려주세요</h1>
-      <p class="step-desc">수임료가 결정되는 단계예요. 모르셔도 괜찮아요!</p>
+      <h1 class="step-title">2024년 수입과<br>장부 상황을 알려주세요</h1>
+      <p class="step-desc">이 정보로 <strong>예상 신고유형과 수임료</strong>가 자동 계산돼요</p>
 
       <div class="form-group">
-        <label class="form-label">2025년 귀속 총수입 구간<span class="req">*</span></label>
+        <label class="form-label">2024년 귀속 총수입금액<span class="req">*</span></label>
+        <p class="form-hint">💡 2024년 한 해 동안 발생한 수입 (이미 작년에 신고한 기준)</p>
         <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="수입구간" value="2400만 이하" required>2,400만원 이하</label>
-          <label class="radio-label"><input type="radio" name="수입구간" value="2400~7500만">2,400만원 ~ 7,500만원</label>
-          <label class="radio-label"><input type="radio" name="수입구간" value="7500만 이상">7,500만원 이상</label>
-          <label class="radio-label"><input type="radio" name="수입구간" value="모름">잘 모르겠어요</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="신규 (2024년 수입 없음)" required>신규 (2024년 수입 없음)</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="2,400만원 미만">2,400만원 미만</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="2,400만 ~ 3,600만원">2,400만 ~ 3,600만원</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="3,600만 ~ 6,000만원">3,600만 ~ 6,000만원</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="6,000만 ~ 7,500만원">6,000만 ~ 7,500만원</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="7,500만 ~ 1.5억원">7,500만 ~ 1.5억원</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="1.5억원 이상">1.5억원 이상</label>
+          <label class="radio-label"><input type="radio" name="2024년수입" value="모르겠음">모르겠음 (세무사 확인)</label>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="form-label">희망 신고 유형<span class="req">*</span></label>
+        <label class="form-label">2025년 예상 총수입금액<span class="req">*</span></label>
+        <p class="form-hint">💡 이번에 신고할 2025년 수입 (대략 선택)</p>
         <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="신고유형" value="단순경비율 추계" required>단순경비율 추계 <strong style="color:var(--orange);margin-left:auto">7만원~</strong></label>
-          <label class="radio-label"><input type="radio" name="신고유형" value="기준경비율 추계">기준경비율 추계 <strong style="color:var(--orange);margin-left:auto">15만원~</strong></label>
-          <label class="radio-label"><input type="radio" name="신고유형" value="간편장부">간편장부 <strong style="color:var(--orange);margin-left:auto">25만원~</strong></label>
-          <label class="radio-label"><input type="radio" name="신고유형" value="모름 - 세무사 추천">모름 — 세무사가 추천해주세요</label>
+          <label class="radio-label"><input type="radio" name="2025년수입" value="2,400만원 미만" required>2,400만원 미만</label>
+          <label class="radio-label"><input type="radio" name="2025년수입" value="2,400만 ~ 7,500만원">2,400만 ~ 7,500만원</label>
+          <label class="radio-label"><input type="radio" name="2025년수입" value="7,500만 ~ 1.5억원">7,500만 ~ 1.5억원</label>
+          <label class="radio-label"><input type="radio" name="2025년수입" value="1.5억원 이상">1.5억원 이상</label>
+          <label class="radio-label"><input type="radio" name="2025년수입" value="모르겠음">모르겠음</label>
         </div>
       </div>
 
-      <div class="pricing-hint">
-        <strong>💡 수임료는 이 단계 선택으로 결정돼요</strong>
-        "모르겠어요" 선택 시 세무사가 가장 유리한 방식으로 안내드립니다. 부가세 별도, 추가 비용 없음.
+      <div class="form-group">
+        <label class="form-label">장부 기장 여부<span class="req">*</span></label>
+        <p class="form-hint">💡 2025년 수입·지출 장부(엑셀·간편장부 등)를 작성 중이신가요?</p>
+        <div class="radio-group inline">
+          <label class="radio-label"><input type="radio" name="장부기장" value="있음" required>✅ 있음</label>
+          <label class="radio-label"><input type="radio" name="장부기장" value="없음">❌ 없음</label>
+          <label class="radio-label"><input type="radio" name="장부기장" value="모름">🤷 모름</label>
+        </div>
+      </div>
+
+      <!-- 실시간 예측 카드 -->
+      <div class="predict-card" id="predictCard" style="display:none;"></div>
+
+      <!-- 수수료 정산 안내 -->
+      <div class="info-box" style="background:var(--orange-light);color:var(--orange-dark);">
+        <strong>💡 수임료 산정 방식</strong><br>
+        접수 시 위 정보로 예상 유형의 수임료를 선입금 받습니다. <strong>실제 자료 검토 후 유형이 달라지면 납부서 전달 전에 정산</strong>해드려요 (간단해지면 차액 환불 / 복잡해지면 차액 청구).
       </div>
 
       <div class="step-nav">
@@ -600,6 +689,21 @@
           <span><strong>[필수]</strong> 종합소득세 신고 대행 업무를 위해 위 개인정보 수집·이용에 동의합니다. 수집된 정보는 업무 완료 후 즉시 파기됩니다.</span>
         </label>
       </div>
+
+      <div class="form-group">
+        <label class="agree-label">
+          <input type="checkbox" name="수수료정산동의" id="agreeFee" required>
+          <span><strong>[필수]</strong> 접수 시 예상 유형 수임료를 선입금하고, <strong>실제 자료 확인 후 유형이 달라지면 납부서 전달 전에 차액 정산</strong>(간단해지면 환불, 복잡해지면 추가 청구)됨에 동의합니다.</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="agree-label">
+          <input type="checkbox" name="환불정책동의" id="agreeRefund" required>
+          <span><strong>[필수]</strong> 환불 정책에 동의합니다 — <strong>수임료 입금 후 24시간 이내에만 환불 가능</strong>하며, 24시간 경과 후에는 <strong>단순 변심에 의한 환불이 불가</strong>합니다.</span>
+        </label>
+      </div>
+
       <div class="form-group">
         <label class="agree-label">
           <input type="checkbox" name="마케팅동의">
@@ -621,6 +725,18 @@
     <div class="success-title">신청 완료!</div>
     <p class="success-sub">접수 확인 후 <strong>카톡으로 안내</strong>드릴게요.<br>보통 당일 내 연락드립니다.</p>
 
+    <!-- 예상 신고유형 안내 -->
+    <div class="predict-card normal" style="margin: 16px 0;">
+      <div class="predict-label">💡 예상 신고 유형</div>
+      <div class="predict-type" id="successPredictType">-</div>
+      <div class="predict-fee">
+        예상 수임료 <span class="amount" id="successFeeAmount">-</span> <span class="vat">(VAT 별도)</span>
+      </div>
+      <div class="predict-notice">
+        ※ 실제 자료 확인 후 유형 변경 시 <strong>납부서 전달 전에 정산</strong>됩니다.
+      </div>
+    </div>
+
     <div class="account-box">
       <strong>💳 수임료 입금 계좌</strong>
       <div class="account">KEB하나은행 218-910041-90704</div>
@@ -637,6 +753,14 @@
         <li><strong>세무사 검토 & 신고</strong> — 2~5일 소요</li>
         <li><strong>결과 안내</strong> — 접수증·납부서·절세팁 발송</li>
       </ol>
+    </div>
+
+    <!-- 환불 정책 안내 -->
+    <div class="info-box" style="background:#FFF3E0; color:#E65100; margin-top:16px;">
+      <strong>🔒 환불 정책 (필독)</strong><br>
+      • <strong>입금 후 24시간 이내</strong>: 100% 환불 가능<br>
+      • <strong>입금 후 24시간 경과</strong>: 환불 불가 (단순 변심 불가)<br>
+      • 예상 유형과 실제 유형이 다를 경우 납부서 전 정산
     </div>
 
     <p style="font-size:13px;color:var(--text-mute);margin:16px 0 8px;">
@@ -715,6 +839,152 @@
     return true;
   }
 
+  // ===== 신고유형 자동 예측 =====
+  const INCOME_2024_MAP = {
+    '신규 (2024년 수입 없음)': 0,
+    '2,400만원 미만': 1200,
+    '2,400만 ~ 3,600만원': 3000,
+    '3,600만 ~ 6,000만원': 4800,
+    '6,000만 ~ 7,500만원': 6750,
+    '7,500만 ~ 1.5억원': 11250,
+    '1.5억원 이상': 20000,
+    '모르겠음': -1
+  };
+
+  // 업종 그룹별 기준금액 (만원)
+  // simple: 단순경비율 한도 (직전년도)
+  // compulsory: 복식부기 의무 기준 (직전년도)
+  const GROUP_THRESHOLDS = {
+    'A': { simple: 6000, compulsory: 30000 },  // 도소매·농업 등
+    'B': { simple: 3600, compulsory: 15000 },  // 제조·음식·건설
+    'C': { simple: 2400, compulsory: 7500 },   // 서비스업·프리랜서
+    'D': { simple: 0, compulsory: 0 }           // 전문직 (무조건 복식부기)
+  };
+
+  function getSelectedValue(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : null;
+  }
+
+  function getSelectedGroup() {
+    const el = document.querySelector(`input[name="업종"]:checked`);
+    return el ? el.dataset.group : null;
+  }
+
+  function computePrediction() {
+    const industry = getSelectedValue('업종');
+    const group = getSelectedGroup();
+    const income2024 = getSelectedValue('2024년수입');
+    const book = getSelectedValue('장부기장');
+
+    if (!industry || !income2024 || !book) return null;
+
+    // 전문직 - 무조건 복식부기
+    if (group === 'D') {
+      return {
+        type: '복식부기 의무 (전문직)',
+        fee: '500,000원~',
+        feeValue: '500000',
+        note: '전문직은 수입과 무관하게 복식부기 의무입니다. 수임 전 세무사와 별도 상담 후 견적을 확정해 드립니다.',
+        isSpecial: true
+      };
+    }
+
+    // 판단 불가 (기타 업종이거나 수입 모름)
+    if (group === '?' || income2024 === '모르겠음') {
+      return {
+        type: '세무사 확인 필요',
+        fee: '접수 후 안내',
+        feeValue: '0',
+        note: '정확한 유형 판단을 위해 세무사가 직접 확인 후 수임료를 안내드립니다.',
+        isSpecial: true
+      };
+    }
+
+    const inc = INCOME_2024_MAP[income2024];
+    const t = GROUP_THRESHOLDS[group];
+    if (!t) return null;
+
+    // 신규 사업자 - 단순경비율
+    if (income2024 === '신규 (2024년 수입 없음)') {
+      return {
+        type: '단순경비율 추계',
+        fee: '70,000원',
+        feeValue: '70000',
+        note: '신규 사업자는 단순경비율 적용이 가능합니다. 가장 간단한 신고 방식이에요.',
+        isSpecial: false
+      };
+    }
+
+    // 복식부기 의무
+    if (inc >= t.compulsory) {
+      return {
+        type: '복식부기 의무',
+        fee: '500,000원~',
+        feeValue: '500000',
+        note: `직전년도(2024년) 수입이 업종 복식부기 의무 기준(${(t.compulsory/10000)}억원)을 초과합니다. 추계 신고 시 가산세가 부과되므로 복식부기가 필수입니다. 수임 전 별도 상담 후 견적 확정.`,
+        isSpecial: true
+      };
+    }
+
+    // 단순경비율
+    if (inc < t.simple) {
+      return {
+        type: '단순경비율 추계',
+        fee: '70,000원',
+        feeValue: '70000',
+        note: `직전년도 수입이 업종 단순경비율 한도(${t.simple}만원) 미만이라 단순경비율 적용 가능합니다.`,
+        isSpecial: false
+      };
+    }
+
+    // 단순경비율 초과, 복식부기 미만 → 간편장부 or 기준경비율
+    if (book === '있음') {
+      return {
+        type: '간편장부',
+        fee: '200,000원',
+        feeValue: '200000',
+        note: '장부가 있으시니 간편장부가 절세에 유리합니다. 추계보다 경비 인정 폭이 커서 환급 가능성이 높아요.',
+        isSpecial: false
+      };
+    } else {
+      return {
+        type: '기준경비율 추계',
+        fee: '150,000원',
+        feeValue: '150000',
+        note: '장부 없이 신고 가능한 방식입니다. 간편장부로 전환 시 절세 효과 증가 가능 — 세무사가 유리한 방식으로 재추천해드릴 수 있습니다.',
+        isSpecial: false
+      };
+    }
+  }
+
+  function updatePrediction() {
+    const result = computePrediction();
+    const card = document.getElementById('predictCard');
+    if (!result) { card.style.display = 'none'; return; }
+
+    card.style.display = 'block';
+    card.className = 'predict-card ' + (result.isSpecial ? 'special' : 'normal');
+    card.innerHTML = `
+      <div class="predict-label">💡 예상 신고 유형</div>
+      <div class="predict-type">${result.type}</div>
+      <div class="predict-fee">
+        예상 수임료 <span class="amount">${result.fee}</span> <span class="vat">(VAT 별도)</span>
+      </div>
+      <div class="predict-note">${result.note}</div>
+      <div class="predict-notice">
+        ※ 이 예측은 입력하신 정보 기반의 추정치입니다. 실제 자료 확인 후 유형 변경 시 <strong>납부서 전달 전에 정산</strong>됩니다 (간단해지면 차액 환불).
+      </div>
+      <input type="hidden" name="예측신고유형" value="${result.type}">
+      <input type="hidden" name="예상수임료" value="${result.feeValue}">
+    `;
+  }
+
+  // 예측 업데이트 트리거
+  document.querySelectorAll('input[name="업종"], input[name="2024년수입"], input[name="2025년수입"], input[name="장부기장"]').forEach(el => {
+    el.addEventListener('change', updatePrediction);
+  });
+
   // 휴대폰 번호 자동 포맷
   document.querySelector('input[name="휴대폰"]').addEventListener('input', e => {
     let v = e.target.value.replace(/\D/g, '');
@@ -738,9 +1008,17 @@
     e.preventDefault();
     if (!validateStep(currentStep)) return;
 
-    // 개인정보 동의 필수 체크
+    // 필수 동의 체크 (3종)
     if (!document.getElementById('agreeRequired').checked) {
       alert('개인정보 수집·이용 동의는 필수입니다.');
+      return;
+    }
+    if (!document.getElementById('agreeFee').checked) {
+      alert('수수료 정산 방식 동의는 필수입니다.');
+      return;
+    }
+    if (!document.getElementById('agreeRefund').checked) {
+      alert('환불 정책 동의는 필수입니다.');
       return;
     }
 
@@ -763,6 +1041,27 @@
     const now = new Date();
     const ts = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
     formData.append('접수일시', ts);
+
+    // 업종 그룹 자동 추출 (Step 2에서 선택한 라디오의 data-group 속성)
+    const industryRadio = document.querySelector('input[name="업종"]:checked');
+    const group = industryRadio ? industryRadio.dataset.group : '?';
+    formData.append('업종그룹', group);
+
+    // 예측 결과도 저장 (화면에 계산된 값 재계산)
+    const prediction = computePrediction();
+    if (prediction) {
+      // hidden input이 이미 있으면 중복될 수 있으니 먼저 제거 후 재추가
+      formData.delete('예측신고유형');
+      formData.delete('예상수임료');
+      formData.append('예측신고유형', prediction.type);
+      formData.append('예상수임료', prediction.feeValue);
+
+      // 성공 화면 업데이트 (수임료 표시)
+      const feeEl = document.getElementById('successFeeAmount');
+      if (feeEl) feeEl.textContent = prediction.fee;
+      const typeEl = document.getElementById('successPredictType');
+      if (typeEl) typeEl.textContent = prediction.type;
+    }
 
     try {
       await fetch(SCRIPT_URL, {
